@@ -5,7 +5,12 @@ import {
     clearTypeFilter,
     filterByCreate,
 } from '../../redux/actions';
-import { Button, Select, Div } from './StyleFilters';
+import {
+    Button,
+    Select,
+    FilterContainer,
+    CenteredContainer,
+} from './StyleFilters';
 
 const Filters = ({ onSortOrderChange, types }) => {
     const dispatch = useDispatch();
@@ -33,53 +38,62 @@ const Filters = ({ onSortOrderChange, types }) => {
     };
 
     const toggleSort = () => {
-        setIsOpenSort(!isOpenSort);
+        setIsOpenSort((prevState) => !prevState);
         setIsOpenFilters(false);
     };
 
     const toggleFilters = () => {
-        setIsOpenFilters(!isOpenFilters);
+        setIsOpenFilters((prevState) => !prevState);
         setIsOpenSort(false);
     };
 
     return (
-        <div>
-            <Button onClick={toggleSort}>Sort</Button>
-            <Button onClick={toggleFilters}>Filters</Button>
-            {isOpenSort && (
-                <Div>
-                    <Select onChange={handleOrderChange} value={selectOrder}>
-                        <option value="alph">Alphabetical</option>
-                        <option value="asc">Ascending (A-Z)</option>
-                        <option value="desc">Descending (Z-A)</option>
-                    </Select>
-                    <Select onChange={handleOrderChange} value={selectOrder}>
-                        <option value="attack">Attack</option>
-                        <option value="less">Less (-)</option>
-                        <option value="more">More (+)</option>
-                    </Select>
-                </Div>
-            )}
-            {isOpenFilters && (
-                <Div>
-                    <Select onChange={handleCreated}>
-                        <option value="all">All</option>
-                        <option value="created">Created</option>
-                        <option value="api">Api</option>
-                    </Select>
-                    <Select onChange={(e) => handleTypeChange(e.target.value)}>
-                        <option value="">Types</option>
-                        {types.map((type) => (
-                            <option key={type.id} value={type.name}>
-                                {type.name}
-                            </option>
-                        ))}
-                    </Select>
-                </Div>
-            )}
-        </div>
+        <FilterContainer>
+            <CenteredContainer>
+                <Button onClick={toggleSort}>Sort</Button>
+                <Button onClick={toggleFilters}>Filters</Button>
+                {isOpenSort && (
+                    <>
+                        <Select
+                            onChange={handleOrderChange}
+                            value={selectOrder}
+                        >
+                            <option value="alph">Alphabetical</option>
+                            <option value="asc">Ascending (A-Z)</option>
+                            <option value="desc">Descending (Z-A)</option>
+                        </Select>
+                        <Select
+                            onChange={handleOrderChange}
+                            value={selectOrder}
+                        >
+                            <option value="attack">Attack</option>
+                            <option value="less">Less (-)</option>
+                            <option value="more">More (+)</option>
+                        </Select>
+                    </>
+                )}
+                {isOpenFilters && (
+                    <>
+                        <Select onChange={handleCreated}>
+                            <option value="all">All</option>
+                            <option value="created">Created</option>
+                            <option value="api">Api</option>
+                        </Select>
+                        <Select
+                            onChange={(e) => handleTypeChange(e.target.value)}
+                        >
+                            <option value="">Types</option>
+                            {types.map((type) => (
+                                <option key={type.id} value={type.name}>
+                                    {type.name}
+                                </option>
+                            ))}
+                        </Select>
+                    </>
+                )}
+            </CenteredContainer>
+        </FilterContainer>
     );
 };
 
 export default Filters;
-//s

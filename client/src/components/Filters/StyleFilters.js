@@ -1,5 +1,17 @@
 import styled from 'styled-components';
 
+export const FilterContainer = styled.div`
+    position: relative;
+`;
+
+export const CenteredContainer = styled.div`
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-30%);
+    z-index: 1;
+`;
+
 export const Button = styled.button`
     background-color: #000000;
     border: 1px solid #fff;
@@ -7,7 +19,7 @@ export const Button = styled.button`
     padding: 8px 16px;
     font-size: 14px;
     cursor: pointer;
-    margin-right: 10px; /* Establece un margen a la derecha para separar los botones */
+    margin: 1px 8px; /* Agregar un margin horizontal */
 `;
 
 export const Select = styled.select`
@@ -15,10 +27,4 @@ export const Select = styled.select`
     color: black;
     padding: 8px 16px;
     font-size: 14px;
-`;
-
-export const Div = styled.div`
-    margin-bottom: 16px;
-    display: flex; /* Utiliza flexbox para alinear los elementos horizontalmente */
-    align-items: center; /* Alinea los elementos verticalmente al centro */
 `;
