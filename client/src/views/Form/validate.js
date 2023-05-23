@@ -1,4 +1,4 @@
-const validate = (input) => {
+const validateForm = (input) => {
     try {
         let errors = {};
 
@@ -89,4 +89,4 @@ const validate = (input) => {
     }
 };
 
-export default validate;
+export default validateForm;

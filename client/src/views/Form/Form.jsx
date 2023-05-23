@@ -1,8 +1,18 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import validate from './validate';
 import { getTypes } from '../../redux/actions';
+import validateForm from './validate';
+import {
+    FormContainer,
+    Formul,
+    Title,
+    InputContainer,
+    Input,
+    Select,
+    Error,
+    SubmitButton,
+} from './StyleForm';
 
 function Form() {
     const dispatch = useDispatch();
@@ -35,23 +45,29 @@ function Form() {
         const property = event.target.name;
         const value = event.target.value;
 
-        if (property === 'types') {
-            setForm((prevForm) => ({
-                ...prevForm,
-                types: { ...prevForm.types, [event.target.id]: value },
-            }));
-        } else {
-            setForm((prevForm) => ({ ...prevForm, [property]: value }));
-        }
+        setForm((prevForm) => {
+            let updatedForm;
+
+            if (property === 'types') {
+                updatedForm = {
+                    ...prevForm,
+                    types: { ...prevForm.types, [event.target.id]: value },
+                };
+            } else {
+                updatedForm = { ...prevForm, [property]: value };
+            }
+
+            const formErrors = validateForm(updatedForm); // Utiliza el formulario actualizado
+            setErrors(formErrors);
+
+            return updatedForm;
+        });
     };
 
     const submitHandler = (event) => {
         event.preventDefault();
 
-        const formErrors = validate(form);
-        setErrors(formErrors);
-
-        if (Object.keys(formErrors).length === 0) {
+        if (Object.keys(errors).length === 0) {
             axios
                 .post('http://localhost:3001/pokemons', form)
                 .then((res) => {
@@ -65,123 +81,124 @@ function Form() {
     };
 
     return (
-        <form onSubmit={submitHandler}>
-            <div>
-                <label>Name:</label>
-                <input
-                    type="text"
-                    value={form.name}
-                    onChange={changeHandler}
-                    name="name"
-                />
-                {errors.name && <p>{errors.name}</p>}
-            </div>
-            <div>
-                <label>Image:</label>
-                <input
-                    type="text"
-                    value={form.image}
-                    onChange={changeHandler}
-                    name="image"
-                />
-                {errors.image && <p>{errors.image}</p>}
-            </div>
-            <div>
-                <label>Life:</label>
-                <input
-                    type="number"
-                    value={form.life}
-                    onChange={changeHandler}
-                    name="life"
-                />
-                {errors.life && <p>{errors.life}</p>}
-            </div>
-            <div>
-                <label>Attack:</label>
-                <input
-                    type="number"
-                    value={form.attack}
-                    onChange={changeHandler}
-                    name="attack"
-                />
-                {errors.attack && <p>{errors.attack}</p>}
-            </div>
-            <div>
-                <label>Defense:</label>
-                <input
-                    type="number"
-                    value={form.defense}
-                    onChange={changeHandler}
-                    name="defense"
-                />
-                {errors.defense && <p>{errors.defense}</p>}
-            </div>
-            <div>
-                <label>Speed:</label>
-                <input
-                    type="number"
-                    value={form.speed}
-                    onChange={changeHandler}
-                    name="speed"
-                />
-                {errors.speed && <p>{errors.speed}</p>}
-            </div>
-            <div>
-                <label>Height:</label>
-                <input
-                    type="number"
-                    value={form.height}
-                    onChange={changeHandler}
-                    name="height"
-                />
-                {errors.height && <p>{errors.height}</p>}
-            </div>
-            <div>
-                <label>Weight:</label>
-                <input
-                    type="number"
-                    value={form.weight}
-                    onChange={changeHandler}
-                    name="weight"
-                />
-                {errors.weight && <p>{errors.weight}</p>}
-            </div>
-            <div>
-                <label>Type 1:</label>
-                <select
-                    value={form.types.type1}
-                    onChange={changeHandler}
-                    name="types"
-                    id="type1"
-                >
-                    <option value="">Select a type 1</option>
-                    {types.map((type) => (
-                        <option key={type.id} value={type.name}>
-                            {type.name}
-                        </option>
-                    ))}
-                </select>
-                {errors.types && <p>{errors.types}</p>}
-            </div>
-            <div>
-                <label>Type 2:</label>
-                <select
-                    value={form.types.type2}
-                    onChange={changeHandler}
-                    name="types"
-                    id="type2"
-                >
-                    <option value="">Select a type 2</option>
-                    {types.map((type) => (
-                        <option key={type.id} value={type.name}>
-                            {type.name}
-                        </option>
-                    ))}
-                </select>
-                {errors.types && <p>{errors.types}</p>}
-            </div>
-            <button type="submit">Submit</button>
-        </form>
+        <FormContainer>
+            <Formul onSubmit={submitHandler}>
+                <Title>Create a Pokemon</Title>
+                <InputContainer>
+                    <Input
+                        type="text"
+                        value={form.name}
+                        onChange={changeHandler}
+                        name="name"
+                        placeholder="Name"
+                    />
+                    <Error show={!!errors.name}>{errors.name}</Error>
+                </InputContainer>
+                <InputContainer>
+                    <Input
+                        type="text"
+                        value={form.image}
+                        onChange={changeHandler}
+                        name="image"
+                        placeholder="image"
+                    />
+                    <Error show={!!errors.image}>{errors.image}</Error>
+                </InputContainer>
+                <InputContainer>
+                    <Input
+                        type="number"
+                        value={form.life}
+                        onChange={changeHandler}
+                        name="life"
+                        placeholder="Life"
+                    />
+                    <Error show={!!errors.life}>{errors.life}</Error>
+                </InputContainer>
+                <InputContainer>
+                    <Input
+                        type="number"
+                        value={form.attack}
+                        onChange={changeHandler}
+                        name="attack"
+                        placeholder="Attack"
+                    />
+                    <Error show={!!errors.attack}>{errors.attack}</Error>
+                </InputContainer>
+                <InputContainer>
+                    <Input
+                        type="number"
+                        value={form.defense}
+                        onChange={changeHandler}
+                        name="defense"
+                        placeholder="Defense"
+                    />
+                    <Error show={!!errors.defense}>{errors.defense}</Error>
+                </InputContainer>
+                <InputContainer>
+                    <Input
+                        type="number"
+                        value={form.speed}
+                        onChange={changeHandler}
+                        name="speed"
+                        placeholder="Speed"
+                    />
+                    <Error show={!!errors.speed}>{errors.speed}</Error>
+                </InputContainer>
+                <InputContainer>
+                    <Input
+                        type="number"
+                        value={form.height}
+                        onChange={changeHandler}
+                        name="height"
+                        placeholder="Height"
+                    />
+                    <Error show={!!errors.height}>{errors.height}</Error>
+                </InputContainer>
+                <InputContainer>
+                    <Input
+                        type="number"
+                        value={form.weight}
+                        onChange={changeHandler}
+                        name="weight"
+                        placeholder="Weight"
+                    />
+                    <Error show={!!errors.weight}>{errors.weight}</Error>
+                </InputContainer>
+                <InputContainer>
+                    <Select
+                        value={form.types.type1}
+                        onChange={changeHandler}
+                        name="types"
+                        id="type1"
+                    >
+                        <option value="">Select a type 1</option>
+                        {types.map((type) => (
+                            <option key={type.id} value={type.name}>
+                                {type.name}
+                            </option>
+                        ))}
+                    </Select>
+                    <Error show={!!errors.types}>{errors.types}</Error>
+                </InputContainer>
+                <InputContainer>
+                    <Select
+                        value={form.types.type2}
+                        onChange={changeHandler}
+                        name="types"
+                        id="type2"
+                    >
+                        <option value="">Select a type 2</option>
+                        {types.map((type) => (
+                            <option key={type.id} value={type.name}>
+                                {type.name}
+                            </option>
+                        ))}
+                    </Select>
+                    {errors.types && <Error>{errors.types}</Error>}
+                </InputContainer>
+                <SubmitButton type="submit">Submit</SubmitButton>
+            </Formul>
+        </FormContainer>
     );
 }
 
