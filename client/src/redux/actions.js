@@ -48,7 +48,7 @@ export const filterByType = (type) => {
 
 export const orderPokemon = (sortOrder) => {
     return async function (dispatch, getState) {
-        const { pokemons } = getState();
+        const { pokemons, selectedType } = getState();
         let sortedPokemons = [...pokemons];
 
         if (sortOrder === 'asc') {
@@ -71,6 +71,11 @@ export const orderPokemon = (sortOrder) => {
                 filteredPokemons: sortedPokemons,
             },
         });
+
+        // Restablecer el filtro de tipo seleccionado después de ordenar
+        if (selectedType !== '') {
+            dispatch(filterByType(selectedType));
+        }
     };
 };
 
