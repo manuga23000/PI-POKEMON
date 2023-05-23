@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getTypes } from '../../redux/actions';
 import validateForm from './validate';
+import pokemonGif from '../../Images/pokemongo.gif';
+
 import {
     FormContainer,
     Formul,
@@ -12,6 +14,9 @@ import {
     Select,
     Error,
     SubmitButton,
+    StyledLink,
+    StyledGif,
+    Arrow,
 } from './StyleForm';
 
 function Form() {
@@ -82,6 +87,10 @@ function Form() {
 
     return (
         <FormContainer>
+            <StyledLink to="/home">
+                <Arrow>&#8592;</Arrow>
+                <StyledGif src={pokemonGif} alt="Pokemon GIF" />
+            </StyledLink>
             <Formul onSubmit={submitHandler}>
                 <Title>Create a Pokemon</Title>
                 <InputContainer>

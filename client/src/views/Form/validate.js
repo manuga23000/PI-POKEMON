@@ -14,8 +14,11 @@ const validateForm = (input) => {
         // Validar imagen
         if (!input.image) {
             errors.image = 'La imagen es obligatoria';
-        } else if (!/^https?:\/\/[^\s/$.?#].[^\s]*$/.test(input.image)) {
-            errors.image = 'La imagen debe ser una URL válida';
+        } else {
+            const trimmedImage = input.image.trim(); // Eliminar espacios en blanco al principio y al final
+            if (!/^https?:\/\/[^\s/$.?#].[^\s]*$/.test(trimmedImage)) {
+                errors.image = 'La imagen debe ser una URL válida';
+            }
         }
 
         // Validar vida
