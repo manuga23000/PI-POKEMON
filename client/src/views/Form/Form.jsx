@@ -85,6 +85,10 @@ function Form() {
         }
     };
 
+    const submitButtonStyle = {
+        cursor: Object.keys(errors).length > 0 ? 'not-allowed' : 'pointer',
+    };
+
     return (
         <FormContainer>
             <StyledLink to="/home">
@@ -205,7 +209,13 @@ function Form() {
                     </Select>
                     {errors.types && <Error>{errors.types}</Error>}
                 </InputContainer>
-                <SubmitButton type="submit">Submit</SubmitButton>
+                <SubmitButton
+                    type="submit"
+                    disabled={Object.keys(errors).length > 0}
+                    style={submitButtonStyle}
+                >
+                    Submit
+                </SubmitButton>
             </Formul>
         </FormContainer>
     );

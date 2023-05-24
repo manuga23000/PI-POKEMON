@@ -43,12 +43,13 @@ const Filters = ({ onSortOrderChange, types }) => {
                     <option value="less">Less (-)</option>
                 </Select>
                 <Select onChange={handleCreated}>
+                    <option value="Origin">Filter by Origin</option>
                     <option value="all">All Pokemons</option>
                     <option value="created">Created</option>
                     <option value="api">Api</option>
                 </Select>
                 <Select onChange={(e) => handleTypeChange(e.target.value)}>
-                    <option value="">Types</option>
+                    <option value="Types">Filter by Types</option>
                     {types.map((type) => (
                         <option key={type.id} value={type.name}>
                             {type.name}

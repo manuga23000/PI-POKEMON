@@ -1,11 +1,11 @@
 const { Router } = require('express');
 const {
-    createPokemonHandler,
+    addPokemonHandler,
     getPokemonsHandler,
     getPokemonByIdHandler,
 } = require('../handlers/pokemonshandler');
 const { getTypesHandler } = require('../handlers/typeshandlers');
-const { allTypesMiddleware } = require('../middlewares/typesmid');
+const { TypesMiddleware } = require('../middlewares/typesmiddleware');
 
 const router = Router();
 
@@ -13,8 +13,8 @@ router.get('/pokemons', getPokemonsHandler);
 
 router.get('/pokemons/:id', getPokemonByIdHandler);
 
-router.get('/types', allTypesMiddleware, getTypesHandler);
+router.get('/types', TypesMiddleware, getTypesHandler);
 
-router.post('/pokemons', allTypesMiddleware, createPokemonHandler);
+router.post('/pokemons', TypesMiddleware, addPokemonHandler);
 
 module.exports = router;

@@ -26,8 +26,8 @@ const validateForm = (input) => {
             errors.life = 'La vida es obligatoria';
         } else if (isNaN(input.life)) {
             errors.life = 'La vida debe ser un número';
-        } else if (input.life < 0 || input.life > 255) {
-            errors.life = 'La vida debe estar entre 0 y 255';
+        } else if (input.life < 1 || input.life > 255) {
+            errors.life = 'La vida debe estar entre 1 y 255';
         }
 
         // Validar ataque
@@ -35,7 +35,7 @@ const validateForm = (input) => {
             errors.attack = 'El ataque es obligatorio';
         } else if (isNaN(input.attack)) {
             errors.attack = 'El ataque debe ser un número';
-        } else if (input.attack < 0 || input.attack > 255) {
+        } else if (input.attack < 1 || input.attack > 255) {
             errors.attack = 'El ataque debe estar entre 1 y 255';
         }
 
@@ -44,8 +44,8 @@ const validateForm = (input) => {
             errors.defense = 'La defensa es obligatoria';
         } else if (isNaN(input.defense)) {
             errors.defense = 'La defensa debe ser un número';
-        } else if (input.defense < 0 || input.defense > 255) {
-            errors.defense = 'La defensa debe estar entre 0 y 255';
+        } else if (input.defense < 1 || input.defense > 255) {
+            errors.defense = 'La defensa debe estar entre 1 y 255';
         }
 
         // Validar velocidad
@@ -53,8 +53,8 @@ const validateForm = (input) => {
             errors.speed = 'La velocidad es obligatoria';
         } else if (isNaN(input.speed)) {
             errors.speed = 'La velocidad debe ser un número';
-        } else if (input.speed < 0 || input.speed > 255) {
-            errors.speed = 'La velocidad debe estar entre 0 y 255';
+        } else if (input.speed < 1 || input.speed > 255) {
+            errors.speed = 'La velocidad debe estar entre 1 y 255';
         }
 
         // Validar altura
@@ -62,8 +62,8 @@ const validateForm = (input) => {
             errors.height = 'La altura es obligatoria';
         } else if (isNaN(input.height)) {
             errors.height = 'La altura debe ser un número';
-        } else if (input.height < 0 || input.height > 1000) {
-            errors.height = 'La altura debe estar entre 0 y 1000 metros';
+        } else if (input.height < 1 || input.height > 1000) {
+            errors.height = 'La altura debe estar entre 1 y 1000 metros';
         }
 
         // Validar peso
@@ -71,8 +71,8 @@ const validateForm = (input) => {
             errors.weight = 'El peso es obligatorio';
         } else if (isNaN(input.weight)) {
             errors.weight = 'El peso debe ser un número';
-        } else if (input.weight < 0 || input.weight > 1000) {
-            errors.weight = 'El peso debe estar entre 0 y 1000 kilogramos';
+        } else if (input.weight < 1 || input.weight > 1000) {
+            errors.weight = 'El peso debe estar entre 1 y 1000 kilogramos';
         }
 
         // Validar tipos

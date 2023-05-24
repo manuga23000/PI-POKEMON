@@ -6,10 +6,15 @@ const {
 } = require('../controllers/pokemonscontrollers');
 
 // createPokemonHandler recibe la solicitud del usuario para crear un nuevo Pokemon
-const createPokemonHandler = async (req, res) => {
+const addPokemonHandler = async (req, res) => {
     const { name, image, life, attack, defense, speed, height, weight, types } =
         req.body;
+
     try {
+        const filteredTypes = [types.type1, types.type2].filter(
+            (type) => type !== undefined
+        );
+
         const newPokemon = await createPokemonController({
             name,
             image,
@@ -19,8 +24,9 @@ const createPokemonHandler = async (req, res) => {
             speed,
             height,
             weight,
-            types: [types.type1, types.type2].filter(Boolean), // Filtrar tipos no seleccionados (undefined)
+            types: filteredTypes,
         });
+
         res.status(201).json({
             ...newPokemon.toJSON(),
             types: newPokemon.types.map((type) => type.name),
@@ -31,7 +37,7 @@ const createPokemonHandler = async (req, res) => {
 };
 
 const getPokemonsHandler = async (req, res) => {
-    const { name } = req.query; // Obtiene el parámetro "name" de la consulta HTTP
+    const { name } = req.query;
     try {
         if (name) {
             const results = await getPokemonByName(name.toLowerCase());
@@ -47,14 +53,14 @@ const getPokemonsHandler = async (req, res) => {
             res.status(201).json(results);
         }
     } catch (error) {
-        res.status(400).json({ error: error.message });
+        res.status(404).json({ error: error.message });
     }
 };
 
 const getPokemonByIdHandler = async (req, res) => {
     const { id } = req.params;
-    const source = isNaN(id) ? 'bdd' : 'api';
     try {
+        const source = isNaN(id) ? 'bdd' : 'api';
         const response = await getPokemonById(id, source);
         res.status(201).send(response);
     } catch (error) {
@@ -65,7 +71,7 @@ const getPokemonByIdHandler = async (req, res) => {
 };
 
 module.exports = {
-    createPokemonHandler,
+    addPokemonHandler,
     getPokemonsHandler,
     getPokemonByIdHandler,
 };

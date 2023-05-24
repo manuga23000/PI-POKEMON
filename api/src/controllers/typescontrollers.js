@@ -1,10 +1,10 @@
 const { Type } = require('../db');
 
-const allTypes = async () => {
+const TypesController = async () => {
     const types = await Type.findAll({
         attributes: ['name'],
     });
-    return types; //.map((type) => type.name);
+    return types;
 };
 
-module.exports = { allTypes };
+module.exports = { TypesController };
