@@ -1,7 +1,7 @@
 import React from 'react';
 import LandingWrapper from './StyleLanding';
 import { useHistory } from 'react-router-dom';
-//useHistory te permite controlar la navegación en tu aplicación React
+
 function Landing() {
     const history = useHistory();
 

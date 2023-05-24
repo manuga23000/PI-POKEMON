@@ -1,13 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App'; // Importa el componente principal de la aplicación
+import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { Provider } from 'react-redux'; // Importa el componente Provider de react-redux para proporcionar el store a los componentes
-import { BrowserRouter } from 'react-router-dom'; // Importa el componente BrowserRouter de react-router-dom para habilitar el enrutamiento de navegación
-import { store } from './redux/store'; // Importa el objeto store de redux
-/* Proporciona el store a los componentes el provider*/
-/* Configura el enrutamiento de navegación el browserrouter*/
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+import { store } from './redux/store';
+
 ReactDOM.render(
     <React.StrictMode>
         <Provider store={store}>

@@ -38,7 +38,7 @@ const Home = () => {
     const handleClearFilter = () => {
         setSelectedType('');
         dispatch(clearTypeFilter());
-        dispatch(getPokemons()); // Agregar dispatch para cargar todos los pokemons nuevamente
+        dispatch(getPokemons());
     };
 
     return (
@@ -48,7 +48,7 @@ const Home = () => {
                 types={types}
                 selectedType={selectedType}
                 onTypeChange={handleTypeChange}
-                onClearFilter={handleClearFilter} // Agregar aquí
+                onClearFilter={handleClearFilter}
             />
             <CardsContainer sortOrder={sortOrder} selectedType={selectedType} />
         </Container>

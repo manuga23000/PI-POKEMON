@@ -36,15 +36,7 @@ export function getPokemonsByName(name) {
         });
     };
 }
-//return dispatch, despacha una accion hacia el store con
-//Así que en resumen:
-/*
-Se llama la acción, se ejecuta la función y obtiene los datos de la API
-Se despacha la acción hacia el store llamando a dispatch()
-El reducer recibe la acción y actualiza el estado
-Los componentes se actualizan porque el estado cambió
-De esta manera, las acciones actualizan el estado global usando el store de Redux. 
-*/
+
 export function getPokemonsById(id) {
     return async function (dispatch) {
         var json = await axios.get(`http://localhost:3001/pokemons/${id}`);

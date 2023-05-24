@@ -22,16 +22,12 @@ import {
     Arrow,
     StyledGif,
 } from './StyleDetail';
-//useSelector permite extraer datos del store de Redux desde un componente de React. Recibe una función que obtiene el estado completo y debe devolver el dato que queremos extraer.
+
 function Detail() {
-    //Se extrae el valor del params.id usando useParams():
     const { id } = useParams();
     const dispatch = useDispatch();
     const pokemon = useSelector((state) => state.pokemonsById);
-    //En resumen, este useEffect:
-    //Llama a la acción getPokemonsById pasándole el id del Pokémon
-    //Sólo se vuelve a ejecutar cuando id cambia (cuando el componente recibe un nuevo ID)
-    //Se actualizan los datos del nuevo Pokémon llamando de nuevo a la acción
+
     useEffect(() => {
         dispatch(getPokemonsById(id));
     }, [dispatch, id]);
