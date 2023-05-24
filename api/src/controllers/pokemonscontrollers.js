@@ -12,7 +12,6 @@ const createPokemonController = async ({
     weight,
     types,
 }) => {
-    // Creamos un nuevo Pokemon en la base de datos con los valores recibidos
     const newPokemon = await Pokemon.create({
         name,
         image,
@@ -23,13 +22,9 @@ const createPokemonController = async ({
         height,
         weight,
     });
-    // Buscamos los objetos de tipo en la base de datos que coincidan con los nombres recibidos
     const addtypes = await Type.findAll({ where: { name: types } });
-    // Asociamos los tipos encontrados con el nuevo Pokemon
     await newPokemon.addType(addtypes);
-    // Agregamos los objetos de tipo encontrados como una propiedad del nuevo Pokemon
     newPokemon.types = addtypes;
-    // Devolvemos el nuevo Pokemon creado con sus tipos asociados
     return newPokemon;
 };
 
@@ -47,19 +42,14 @@ const getPokemonByName = async (name) => {
 };
 
 const getDbPokemons = async () => {
-    // Realiza una consulta a la base de datos utilizando el modelo Pokemon y realiza un JOIN con el modelo Type
     const dbPokemons = await Pokemon.findAll({
         include: {
             model: Type,
         },
     });
-    // Mapea los objetos pokemon obtenidos en un nuevo array
     return dbPokemons.map((pokemon) => {
-        // Convierte el objeto pokemon a JSON para obtener una representación plana de los datos
-        // y facilitar su manipulación y envío spreed operator descompone un objeto
         return {
             ...pokemon.toJSON(),
-            // Mapea los tipos asociados al pokemon y los une en una cadena separada por espacios
             types: pokemon.types.map((type) => type.name).join(' '),
         };
     });
@@ -88,7 +78,7 @@ const getPokemonInfo = async (url) => {
         id: response.data.id,
         name: capitalizedFirstLetter,
         life: response.data.stats.find((stat) => stat.stat.name === 'hp')
-            .base_stat, // Use find() to retrieve the stat by name
+            .base_stat,
         attack: response.data.stats.find((stat) => stat.stat.name === 'attack')
             .base_stat,
         defense: response.data.stats.find(
@@ -99,7 +89,7 @@ const getPokemonInfo = async (url) => {
         height: response.data.height,
         weight: response.data.weight,
         image: response.data.sprites.other.dream_world.front_default,
-        types: response.data.types.map((type) => type.type.name).join(' '), // Use a comma instead of a space to separate types
+        types: response.data.types.map((type) => type.type.name).join(' '),
     };
 };
 

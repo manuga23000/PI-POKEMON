@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware, compose } from 'redux';
-import ThunkMiddleware from 'redux-thunk';
+import ThunkMiddleware from 'redux-thunk'; // nos permite definir acciones asíncronas
 
 import rootReducer from './reducer';
 

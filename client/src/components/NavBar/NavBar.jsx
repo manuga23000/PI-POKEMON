@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { getPokemons, getPokemonsByName } from '../../redux/actions';
@@ -13,9 +14,9 @@ import backgroundImage from '../../Images/pokemonn.png';
 function Nav() {
     const dispatch = useDispatch();
     const location = useLocation();
-    const [search, setSearch] = React.useState('');
+    const [search, setSearch] = useState('');
 
-    React.useEffect(() => {
+    useEffect(() => {
         dispatch(getPokemons());
     }, [dispatch]);
 
@@ -26,14 +27,12 @@ function Nav() {
 
     return (
         <MainContainer>
-            {/* TITLE */}
             {location.pathname !== '/pokemon' && (
                 <StyledImg to="/">
                     <img src={backgroundImage} alt="Descripción de la imagen" />
                 </StyledImg>
             )}
 
-            {/* SEARCH_BAR */}
             <StyledSearch>
                 <input
                     type="search"
@@ -45,7 +44,6 @@ function Nav() {
                 />
                 <button onClick={handleSearch}>Search</button>
 
-                {/* CREATE_POKEMON */}
                 <StyledLink to="/create">
                     <h2>Create Pokemon here!</h2>
                 </StyledLink>

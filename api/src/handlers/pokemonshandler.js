@@ -5,7 +5,6 @@ const {
     getPokemonById,
 } = require('../controllers/pokemonscontrollers');
 
-// createPokemonHandler recibe la solicitud del usuario para crear un nuevo Pokemon
 const addPokemonHandler = async (req, res) => {
     const { name, image, life, attack, defense, speed, height, weight, types } =
         req.body;

@@ -7,8 +7,8 @@ const validateForm = (input) => {
             errors.name = 'El nombre es obligatorio';
         } else if (input.name.length < 3) {
             errors.name = 'El nombre debe tener al menos 3 caracteres';
-        } else if (input.name.length > 20) {
-            errors.name = 'El nombre no puede tener más de 20 caracteres';
+        } else if (input.name.length > 12) {
+            errors.name = 'El nombre no puede tener más de 12 caracteres';
         }
 
         // Validar imagen

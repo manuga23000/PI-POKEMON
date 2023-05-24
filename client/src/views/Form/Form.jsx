@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getTypes } from '../../redux/actions';
 import validateForm from './validate';
 import pokemonGif from '../../Images/pokemongo.gif';
-
 import {
     FormContainer,
     Formul,
@@ -76,12 +75,12 @@ function Form() {
             axios
                 .post('http://localhost:3001/pokemons', form)
                 .then((res) => {
-                    alert(res.data);
+                    alert('Pokémon created successfully!');
                     setForm(initialState);
                 })
                 .catch((err) => alert(err));
         } else {
-            alert('Please fill in all required fields');
+            alert('please fill in all the fields that are required');
         }
     };
 
