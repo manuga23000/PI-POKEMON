@@ -36,9 +36,11 @@ const getAllPokemons = async () => {
 
 const getPokemonByName = async (name) => {
     const allPokemons = await getAllPokemons();
-    return allPokemons.filter(
-        (pokemon) => pokemon.name.toLowerCase() === name.toLowerCase()
-    );
+    return allPokemons
+        .filter((pokemon) =>
+            pokemon.name.toLowerCase().includes(name.toLowerCase())
+        )
+        .slice(0, 12);
 };
 
 const getDbPokemons = async () => {
@@ -126,3 +128,4 @@ module.exports = {
     getPokemonByName,
     getPokemonById,
 };
+//

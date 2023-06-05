@@ -41,7 +41,8 @@ const getPokemonsHandler = async (req, res) => {
         if (name) {
             const results = await getPokemonByName(name.toLowerCase());
             if (results.length === 0) {
-                res.status(404).json({
+                res.status(200).json({
+                    error: true,
                     message: `No hay resultados para la búsqueda '${name}'`,
                 });
             } else {

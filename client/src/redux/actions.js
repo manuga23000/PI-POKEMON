@@ -30,10 +30,14 @@ export function getPokemonsByName(name) {
         var json = await axios.get(
             `http://localhost:3001/pokemons?name=${name}`
         );
-        return dispatch({
-            type: GET_BY_NAME,
-            payload: json.data,
-        });
+        if (json.data.error) {
+            alert(json.data.message);
+        } else {
+            return dispatch({
+                type: GET_BY_NAME,
+                payload: json.data,
+            });
+        }
     };
 }
 
