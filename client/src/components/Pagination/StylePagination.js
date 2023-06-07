@@ -3,7 +3,7 @@ import styled from 'styled-components';
 // Estilos para el contenedor de la paginación
 export const PaginationContainer = styled.div`
     position: fixed;
-    left: 0;
+    left: 2px;
     width: 100%;
     display: flex;
     justify-content: center;

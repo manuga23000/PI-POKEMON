@@ -10,6 +10,7 @@ import {
     StyledImg,
 } from './StyledNavBar';
 import backgroundImage from '../../Images/pokemonn.png';
+import Swal from 'sweetalert2';
 
 function Nav() {
     const dispatch = useDispatch();
@@ -21,7 +22,21 @@ function Nav() {
     }, [dispatch]);
 
     const handleSearch = async () => {
-        dispatch(getPokemonsByName(search));
+        try {
+            await dispatch(getPokemonsByName(search));
+        } catch (error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: error.message,
+                confirmButtonColor: '#B02120',
+                confirmButtonText: 'OK',
+                background: 'black',
+                iconColor: '#B02120',
+                color: 'white',
+            });
+        }
+
         setSearch('');
     };
 

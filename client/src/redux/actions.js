@@ -27,16 +27,22 @@ export function getPokemons() {
 
 export function getPokemonsByName(name) {
     return async function (dispatch) {
-        var json = await axios.get(
-            `http://localhost:3001/pokemons?name=${name}`
-        );
-        if (json.data.error) {
-            alert(json.data.message);
-        } else {
-            return dispatch({
-                type: GET_BY_NAME,
-                payload: json.data,
-            });
+        try {
+            const response = await axios.get(
+                `http://localhost:3001/pokemons?name=${name}`
+            );
+            if (response.data.error) {
+                throw new Error(
+                    `No pokemons were found with the following name: '${name}'`
+                );
+            } else {
+                dispatch({
+                    type: GET_BY_NAME,
+                    payload: response.data,
+                });
+            }
+        } catch (error) {
+            throw new Error(error.message);
         }
     };
 }

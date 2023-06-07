@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getTypes } from '../../redux/actions';
 import validateForm from './validate';
 import pokemonGif from '../../Images/pokemongo.gif';
+import Swal from 'sweetalert2';
+
 import {
     FormContainer,
     Formul,
@@ -75,7 +77,16 @@ function Form() {
             axios
                 .post('http://localhost:3001/pokemons', form)
                 .then((res) => {
-                    alert('Pokémon created successfully!');
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success',
+                        text: 'Pokemon created successfully!',
+                        confirmButtonColor: '#4BA02D',
+                        confirmButtonText: 'OK',
+                        background: 'black',
+                        iconColor: '#4BA02D',
+                        color: 'white',
+                    });
                     setForm(initialState);
                 })
                 .catch((err) => alert(err));

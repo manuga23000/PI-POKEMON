@@ -17,6 +17,7 @@ export const StyledImg = styled(Link)`
     img {
         display: flex;
         position: relative;
+        bottom: 2px;
         right: 4em;
         width: 9rem;
         margin: 9px;
