@@ -11,14 +11,13 @@ export const PaginationContainer = styled.div`
     padding: 10px 0;
     box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.1);
     bottom: 0;
-    z-index: 1;
 `;
 
 // Estilos para los botones de página
 export const PageButton = styled.button`
     padding: 8px 16px;
     margin: 0 3px;
-    background-color: ${(props) => (props.active ? '#000' : '#eee')};
+    background-color: ${(props) => (props.active ? '#B02120' : '#eee')};
     color: ${(props) => (props.active ? '#fff' : '#000')};
     border: none;
     border-radius: 4px;
