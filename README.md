@@ -17,7 +17,7 @@
 
 ## **📖 ENUNCIADO**
 
-La idea de este proyecto es construir una aplicación web a partir de la API [**pokeapi**](https://pokeapi.co/) en la que se pueda:
+La idea de este proyecto era construir una aplicación web a partir de la API [**pokeapi**](https://pokeapi.co/) en la que se pueda:
 
 -  Buscar pokemones.
 -  Visualizar la información de los pokemones.
