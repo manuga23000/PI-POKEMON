@@ -2,6 +2,8 @@
 
 # **POKEMON** | Proyecto Individual
 
+Link del proyecto: https://vimeo.com/manage/videos/844093641
+
 ## **📌 OBJETIVOS**
 
 -  Construir una Single Page Application utlizando las tecnologías: **React**, **Redux**, **Node**, **Express** y **Sequelize**.
