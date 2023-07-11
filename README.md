@@ -25,8 +25,6 @@ La idea de este proyecto era construir una aplicación web a partir de la API [*
 -  Ordenarlos.
 -  Crear nuevos pokemones.
 
-### **Únicos end-points que se pueden utilizar**
-
 <br />
 
 ---
