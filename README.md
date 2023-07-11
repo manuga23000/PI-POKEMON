@@ -15,7 +15,7 @@
 
 ---
 
-## **📖 ENUNCIADO GENERAL**
+## **📖 ENUNCIADO**
 
 La idea de este proyecto es construir una aplicación web a partir de la API [**pokeapi**](https://pokeapi.co/) en la que se pueda:
 
@@ -25,30 +25,15 @@ La idea de este proyecto es construir una aplicación web a partir de la API [**
 -  Ordenarlos.
 -  Crear nuevos pokemones.
 
-⚠️ Para las funcionalidades de filtrado y ordenamiento NO se puede utilizar los endpoints de la API externa que ya devuelven los resultados filtrados u ordenados.
-
 ### **Únicos end-points que se pueden utilizar**
-
--  [**PokeApi**](https://pokeapi.co/api/v2/pokemon)
--  **Por id**: _"https://pokeapi.co/api/v2/pokemon/{id}"_
--  **Por nombre**: _"https://pokeapi.co/api/v2/pokemon/{name}"_
--  **Por tipo**: _"https://pokeapi.co/api/v2/type"_
 
 <br />
 
 ---
 
-<div align="center">
-
-## **📁 INSTRUCCIONES**
-
-</div>
-
-<br />
-
 ### **🖱 BASE DE DATOS**
 
-Deberás crear dos modelos para tu base de datos. Una será para los pokemones y la otra será para los tipos de pokemones (pueden llevar el nombre que tu quieras). La relación entre ambos modelos debe ser de muchos a muchos. A continuación te dejamos las propiedades que debe tener cada modelo. Aquellas marcadas con un asterísco son obligatorias.
+Cree dos modelos para tu base de datos. Una para los pokemones y la otra para los tipos de pokemones. La relación entre ambos modelos es de muchos a muchos.
 
 **📍 MODELO 1 | Pokemons**
 
@@ -77,9 +62,9 @@ Deberás crear dos modelos para tu base de datos. Una será para los pokemones y
 
 ### **🖱 BACK-END**
 
-Para esta parte deberás construir un servidor utilizando **NodeJS** y **Express**. Tendrás que conectarlo con tu base de datos mediante **Sequelize**.
+Para esta parte construí un servidor utilizando **NodeJS** y **Express**. Lo conecte con la base de datos mediante **Sequelize**.
 
-Tu servidor deberá contar con las siguientes rutas:
+cuenta con las siguientes rutas:
 
 #### **📍 GET | /pokemons**
 
@@ -89,27 +74,27 @@ Tu servidor deberá contar con las siguientes rutas:
 
 -  Esta ruta obtiene el detalle de un pokemon específico. Es decir que devuelve un objeto con la información pedida en el detalle de un pokemon.
 -  El pokemon es recibido por parámetro (ID).
--  Tiene que incluir los datos del tipo de pokemon al que está asociado.
--  Debe funcionar tanto para los pokemones de la API como para los de la base de datos.
+-  Incluye los datos del tipo de pokemon al que está asociado.
+-  Funciona tanto para los pokemones de la API como para los de la base de datos.
 
 #### **📍 GET | /pokemons/name?="..."**
 
--  Esta ruta debe obtener todos aquellos pokemons que coinciden con el nombre recibido por query.
--  Debe poder buscarlo independientemente de mayúsculas o minúsculas.
--  Si no existe el pokemon, debe mostrar un mensaje adecuado.
--  Debe buscar tanto los de la API como los de la base de datos.
+-  Esta ruta obtiene todos aquellos pokemons que coinciden con el nombre recibido por query.
+-  Lo busca independientemente de mayúsculas o minúsculas.
+-  Si no existe el pokemon, muestra un mensaje adecuado.
+-  Busca tanto los de la API como los de la base de datos.
 
 #### **📍 POST | /pokemons**
 
--  Esta ruta recibirá todos los datos necesarios para crear un pokemon y relacionarlo con sus tipos solicitados.
--  Toda la información debe ser recibida por body.
--  Debe crear un pokemon en la base de datos, y este debe estar relacionado con sus tipos indicados (debe poder relacionarse al menos con dos).
+-  Esta ruta recibe todos los datos necesarios para crear un pokemon y relacionarlo con sus tipos solicitados.
+-  Toda la información es recibida por body.
+-  Crea un pokemon en la base de datos, y esta relacionado con sus tipos.
 
 #### **📍 GET | /types**
 
 -  Obtiene un arreglo con todos los tipos de pokemones.
--  En una primera instancia, cuando la base de datos este vacía, deberás guardar todos los tipos que encuentres en la API.
--  Estos deben ser obtenidos de la API (se evaluará que no haya hardcodeo). Luego de obtenerlos de la API, deben ser guardados en la base de datos para su posterior consumo desde allí.
+-  En una primera instancia, cuando la base de datos este vacía, se guardan todos los tipos que encuentres en la API.
+-  Estos son obtenidos de la API. Luego de obtenerlos, se guardan en la base de datos para su posterior consumo desde allí.
 
 <br />
 
@@ -119,26 +104,23 @@ Tu servidor deberá contar con las siguientes rutas:
 
 ### **🖱 FRONT-END**
 
-Se debe desarrollar una aplicación utilizando **React** y **Redux** que contenga las siguientes vistas:
+Desarrolle una aplicación utilizando **React** y **Redux** que contiene las siguientes vistas:
 
-**📍 LANDING PAGE |** deberás crear una página de inicio o bienvenida con:
-
--  Alguna imagen de fondo representativa al proyecto.
--  Botón para ingresar a la **`home page`**.
+**📍 LANDING PAGE |** página de inicio o bienvenida:
 
 <br />
 
-**📍 HOME PAGE |** la página principal de tu SPA debe contener:
+**📍 HOME PAGE |** la página principal:
 
--  SearchBar: un input de búsqueda para encontrar pokemon por nombre. La búsqueda debe ser exacta, por lo que sólo lo encontrará si se lo busca con su nombre completo.
--  Sector en el que se vea un listado de cards con los pokemones. Al iniciar deberá cargar los primeros resultados obtenidos desde la ruta **`GET /pokemons`** y deberá mostrar su:
+-  SearchBar: un input de búsqueda para encontrar pokemon por nombre.
+-  Sector en el que se ve un listado de cards con los pokemones.
    -  Imagen.
    -  Nombre.
    -  Tipos.
--  Cuando se le hace click a una Card deberá redirigir al detalle de ese pokemon específico.
--  Botones/Opciones para **filtrar** por tipo, y por si su origen es de la API o de la base de datos (creados por nosotros desde el formulario).
+-  Cuando se le hace click a una Card redirigira al detalle de ese pokemon específico.
+-  Botones/Opciones para **filtrar** por tipo, y por si su origen es de la API o de la base de datos.
 -  Botones/Opciones para **ordenar** tanto ascendentemente como descendentemente los pokemones por orden alfabético y por ataque.
--  Paginado: el listado de pokemones se hará por partes. Tu SPA debe contar con un paginado que muestre un total de 12 pokemones por página.
+-  Paginado: Cuenta con un paginado que muestre un total de 12 pokemones por página.
 
 <br />
 
@@ -159,8 +141,6 @@ Se debe desarrollar una aplicación utilizando **React** y **Redux** que conteng
 
 **📍 FORM PAGE |**: en esta vista se encontrará el formulario para crear un nuevo pokemon.
 
-Este formulario debe ser **controlado completamente con JavaScritp**. No se pueden utilizar validaciones HTML, ni utilizar librerías especiales para esto. Debe contar con los siguientes campos:
-
 -  Nombre.
 -  Imagen.
 -  Vida.
@@ -172,21 +152,9 @@ Este formulario debe ser **controlado completamente con JavaScritp**. No se pued
 -  Posibilidad de seleccionar/agregar varios tipos en simultáneo.
 -  Botón para crear el nuevo pokemon.
 
-> [**IMPORANTE**]: es requisito que el formulario de creación esté validado sólo con JavaScript. Puedes agregar las validaciones que consideres. Por ejemplo: que el nombre del pokemon no pueda contener números, o que la defensa no pueda exceder determinado valor, etc.
-
 <br />
 
 ---
-
-<br />
-
-### **🖱 TESTING**
-
-Ten en cuenta que en esta instancia no es obligatorio el desarrollo de testing para tu aplicación. De igual manera, te desafiamos a que los hagas, ¡ya que suman puntos!
-
--  Al menos tener un componente del frontend con sus tests respectivos.
--  Al menos tener dos rutas del backend con sus tests respectivos.
--  Al menos tener un modelo de la base de datos con sus tests respectivos.
 
 <br />
 
